@@ -1,3 +1,4 @@
 {
-    'name': "Event Management System"
+    'name': "Event Management System",
+    'author': 'Irene and Nick'
 }
