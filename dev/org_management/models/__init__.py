@@ -1,1 +1,1 @@
-from . import organizator
+from . import organizator, event
