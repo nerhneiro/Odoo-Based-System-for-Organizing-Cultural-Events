@@ -1,1 +1,1 @@
-from . import organizator, event
+from . import organizator, event, vip_guest
