@@ -1,8 +1,8 @@
 from odoo import api, fields, models
-class Organizator(models.Model):
-    _name = "management.organizator"
+class Organizer(models.Model):
+    _name = "management.organizer"
 
-    _description = "Organizator information"
+    _description = "Organizer information"
 
     name = fields.Char(string="Name", required=True)
     surname = fields.Char(string="Surname", required=True)

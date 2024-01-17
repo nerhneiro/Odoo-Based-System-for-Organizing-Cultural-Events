@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="menu_management_root"
+              name="Management"
+              sequence="10"/>
+
+    <menuitem id="menu_management_operations"
+              name="Operations"
+              parent="menu_management_root"
+              sequence="10"/>
+</odoo>
