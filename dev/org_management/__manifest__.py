@@ -5,6 +5,7 @@
         'security/ir.model.access.csv',
         'views/menu.xml',
         'views/organizer.xml',
-        'views/event.xml'
+        'views/event.xml',
+        'views/vip_guest.xml'
     ]
 }
