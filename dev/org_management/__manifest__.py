@@ -4,6 +4,7 @@
     'data': [
         'security/ir.model.access.csv',
         'views/menu.xml',
-        'views/organizer.xml'
+        'views/organizer.xml',
+        'views/event.xml'
     ]
 }
