@@ -2,3 +2,5 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 org_management.access_management_organizer,access_management_organizer,org_management.model_management_organizer,base.group_user,1,1,1,1
 org_management.access_management_event,access_management_event,org_management.model_management_event,base.group_user,1,1,1,1
 org_management.access_management_vip_guest,access_management_vip_guest,org_management.model_management_vip_guest,base.group_user,1,1,1,1
+org_management.access_management_speaker,access_management_speaker,org_management.model_management_speaker,base.group_user,1,1,1,1
+org_management.access_management_guest,access_management_guest,org_management.model_management_guest,base.group_user,1,1,1,1

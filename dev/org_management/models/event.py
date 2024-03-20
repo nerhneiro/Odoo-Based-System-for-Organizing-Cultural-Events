@@ -1,7 +1,7 @@
 from odoo import api, fields, models
 class Event(models.Model):
     _name = "management.event"
-
+    # _inherit = 'mail.thread'
     _description = "Event information"
 
     name = fields.Char(string="Name", required=True)

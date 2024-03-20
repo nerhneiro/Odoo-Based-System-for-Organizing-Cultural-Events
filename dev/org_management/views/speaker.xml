@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_management_speaker_form" model="ir.ui.view">
+        <field name="name">management.speaker.form</field>
+        <field name="model">management.speaker</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="surname"/>
+                        <field name="second_name"/>
+                        <field name="gender"/>
+                        <field name="phone_number"/>
+                        <field name="email"/>
+                        <field name="speech_title"/>
+                        <field name="speech_description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_management_speaker_tree" model="ir.ui.view">
+        <field name="name">management.speaker.tree</field>
+        <field name="model">management.speaker</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="surname"/>
+                <field name="second_name"/>
+                <field name="gender"/>
+                <field name="phone_number"/>
+                <field name="email"/>
+                <field name="speech_title"/>
+                <field name="speech_description"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_management_speaker" model="ir.actions.act_window">
+        <field name="name">Speakers</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">management.speaker</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_speaker"
+              name="Speakers"
+              parent="menu_management_operations"
+              action="action_management_speaker"
+              sequence="10"/>
+
+</odoo>
