@@ -1,9 +1,10 @@
 {
     'name': "Event Management System",
     'author': 'Irene and Nick',
-    # 'depends': ['mail'],
+    'depends': ['mail'],
     'data': [
         'security/ir.model.access.csv',
+        'data/sequence.xml',
         'views/menu.xml',
         'views/organizer.xml',
         'views/event.xml',

@@ -1,4 +1,4 @@
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 class VIPguest(models.Model):
     _name = "management.vip_guest"
 
@@ -14,4 +14,10 @@ class VIPguest(models.Model):
     passport = fields.Char(string="Passport info")
     visa = fields.Char(string="Visa info")
     country_id = fields.Many2one('res.country', 'Country')
-    #name = fields.Many2many()
+    ref = fields.Char(string="Reference", default=lambda self: _('New'))
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            vals['ref'] = self.env['ir.sequence'].next_by_code('management.vip_guest')
+        return super(VIPguest, self).create(vals_list)

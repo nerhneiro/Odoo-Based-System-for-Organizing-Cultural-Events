@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+        <record id="sequence_management_guest" model="ir.sequence">
+            <field name="name">Guest sequence</field>
+            <field name="code">management.guest</field>
+            <field name="prefix">G</field>
+            <field name="padding">5</field>
+        </record>
+
+        <record id="sequence_management_vip_guest" model="ir.sequence">
+            <field name="name">VIPguest sequence</field>
+            <field name="code">management.vip_guest</field>
+            <field name="prefix">VG</field>
+            <field name="padding">5</field>
+        </record>
+
+        <record id="sequence_management_speaker" model="ir.sequence">
+            <field name="name">Speaker sequence</field>
+            <field name="code">management.speaker</field>
+            <field name="prefix">S</field>
+            <field name="padding">5</field>
+        </record>
+
+    </data>
+</odoo>
