@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.module.category" id="module_category_management">
+        <field name="name">Event management app</field>
+        <field name="description">Category for event management app</field>
+    </record>
+
+    <record id="group_event_organizer" model="res.groups">
+        <field name="name">Organizer</field>
+        <field name="category_id" ref="module_category_management"/>
+    </record>
+    <record id="group_event_guest" model="res.groups">
+        <field name="name">Event guest</field>
+        <field name="category_id" ref="module_category_management"/>
+    </record>
+    <record id="group_event_vip_guest" model="res.groups">
+        <field name="name">Event VIP guest</field>
+        <field name="category_id" ref="module_category_management"/>
+    </record>
+    <record id="group_event_speaker" model="res.groups">
+        <field name="name">Event Speaker</field>
+        <field name="category_id" ref="module_category_management"/>
+    </record>
+</odoo>

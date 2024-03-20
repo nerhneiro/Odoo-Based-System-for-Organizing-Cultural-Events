@@ -4,6 +4,7 @@
     'depends': ['mail'],
     'data': [
         'security/ir.model.access.csv',
+        'security/security.xml',
         'data/sequence.xml',
         'views/menu.xml',
         'views/organizer.xml',
