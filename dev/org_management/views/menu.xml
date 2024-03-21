@@ -5,8 +5,13 @@
               name="Management"
               sequence="10"/>
 
+    <menuitem id="menu_management_block_organizer"
+              name="Create event"
+              parent="menu_management_root"
+              sequence="10"
+            groups="org_management.group_event_organizer"/>
     <menuitem id="menu_management_operations"
-              name="Operations"
+              name="Invite participants"
               parent="menu_management_root"
               sequence="10"/>
 </odoo>

@@ -48,7 +48,7 @@
 
     <menuitem id="menu_events"
               name="Events"
-              parent="menu_management_operations"
+              parent="menu_management_block_organizer"
               action="action_management_event"
               sequence="10"/>
 
