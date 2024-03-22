@@ -33,6 +33,7 @@
                 <field name="place"/>
                 <field name="start"/>
                 <field name="number_of_guests"/>
+                <field name="organizer_ids" widget="many2many_tags"/>
                 <field name="duration"/>
                 <field name="address"/>
             </tree>

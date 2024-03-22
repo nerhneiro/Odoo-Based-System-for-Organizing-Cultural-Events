@@ -11,7 +11,8 @@ class Event(models.Model):
     number_of_guests = fields.Integer(string="Number of guests", tracking=True)
     duration = fields.Float(string="Duration", tracking=True)
     address = fields.Char(string="Address", tracking=True)
-
+    organizer_ids = fields.Many2many(comodel_name="management.organizer", relation="organizers_events_rel",
+                                 column1="event_id", column2="organizer_id", string="Organizers")
     @api.constrains('place', 'address')
     def _check_adress(self):
         for rec in self:

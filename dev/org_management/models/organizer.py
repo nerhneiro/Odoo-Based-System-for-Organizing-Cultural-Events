@@ -11,4 +11,4 @@ class Organizer(models.Model):
     gender = fields.Selection([('male', 'Male'), ('female', 'Female'), ('others', 'Others')], string="Gender")
     phone_number = fields.Char(string="Phone number")
     email = fields.Char(string="Email")
-    event_ids = fields.Many2many("management.event", string="Events")
+    event_ids = fields.Many2many(comodel_name="management.event", relation="organizers_events_rel", column1="organizer_id", column2="event_id", string="Events")
