@@ -1,7 +1,6 @@
 from odoo import api, fields, models
 class Organizer(models.Model):
     _name = "management.organizer"
-
     _description = "Organizer information"
 
     name = fields.Char(string="Name", required=True)
