@@ -12,7 +12,8 @@ class Event(models.Model):
     duration = fields.Float(string="Duration", tracking=True)
     address = fields.Char(string="Address", tracking=True)
     organizer_ids = fields.Many2many('res.users', relation="organizers_events_rel",
-                                     column1="event_id", column2="organizer_id", string="Organizers")
+                                     column1="event_id", column2="organizer_id", string="Organizers", domain=lambda self: [("groups_id", "=",
+                                                  self.env.ref("org_management.group_event_organizer").id)])
 
     @api.constrains('place', 'address')
     def _check_adress(self):
