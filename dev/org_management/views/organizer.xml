@@ -15,7 +15,7 @@
                         <field name="gender"/>
                         <field name="phone_number"/>
                         <field name="email"/>
-                        <field name="event_ids" widget="many2many_tags"/>
+<!--                        <field name="event_ids" widget="many2many_tags"/>-->
                     </group>
                 </sheet>
             </form>
@@ -34,7 +34,7 @@
                 <field name="gender"/>
                 <field name="phone_number"/>
                 <field name="email"/>
-                <field name="event_ids"/>
+<!--                <field name="event_ids"/>-->
             </tree>
         </field>
     </record>
