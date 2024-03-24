@@ -1,16 +1,16 @@
 from odoo import api, fields, models, _
 class Guest(models.Model):
     _name = "management.guest"
-
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = "Guest information"
 
-    name = fields.Char(string="Name", required=True)
-    surname = fields.Char(string="Surname", required=True)
-    second_name = fields.Char(string="Second name", required=False)
-    is_adult = fields.Boolean(string="Is over 18?")
-    gender = fields.Selection([('male', 'Male'), ('female', 'Female'), ('others', 'Others')], string="Gender")
-    phone_number = fields.Char(string="Phone number")
-    email = fields.Char(string="Email")
+    name = fields.Char(string="Name", required=True, tracking=True)
+    surname = fields.Char(string="Surname", required=True, tracking=True)
+    second_name = fields.Char(string="Second name", required=False, tracking=True)
+    is_adult = fields.Boolean(string="Is over 18?", tracking=True)
+    gender = fields.Selection([('male', 'Male'), ('female', 'Female'), ('others', 'Others')], string="Gender", tracking=True)
+    phone_number = fields.Char(string="Phone number", tracking=True)
+    email = fields.Char(string="Email", tracking=True)
     ref = fields.Char(string="Reference", default=lambda self: _('New'))
 
     @api.model_create_multi
@@ -24,3 +24,4 @@ class Guest(models.Model):
         for rec in self:
             if rec.email:
                 template.send_mail(rec.id, force_send=True)
+                self.message_post(body='Invitation sent')

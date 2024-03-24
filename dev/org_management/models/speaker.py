@@ -1,7 +1,7 @@
 from odoo import api, fields, models, _
 class Speaker(models.Model):
     _name = "management.speaker"
-
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = "Speaker information"
 
     name = fields.Char(string="Name", required=True)
