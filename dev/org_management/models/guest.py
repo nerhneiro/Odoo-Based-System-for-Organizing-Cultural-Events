@@ -11,6 +11,9 @@ class Guest(models.Model):
     gender = fields.Selection([('male', 'Male'), ('female', 'Female'), ('others', 'Others')], string="Gender", tracking=True)
     phone_number = fields.Char(string="Phone number", tracking=True)
     email = fields.Char(string="Email", tracking=True)
+    event_id = fields.Many2one(comodel_name='management.event', string="Event")
+    user_id = fields.Many2one(comodel_name='res.users',
+                              string='Connected User')
     ref = fields.Char(string="Reference", default=lambda self: _('New'))
 
     @api.model_create_multi

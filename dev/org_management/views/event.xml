@@ -15,6 +15,7 @@
                         <field name="duration"/>
                         <field name="address"/>
                         <field name="organizer_ids" widget="many2many_tags"/>
+                        <field name="guest_ids"/>
                     </group>
                 </sheet>
                 <div class="oe_chatter">
@@ -37,6 +38,7 @@
                 <field name="organizer_ids" widget="many2many_tags"/>
                 <field name="duration"/>
                 <field name="address"/>
+                <field name="guest_ids"/>
             </tree>
         </field>
     </record>

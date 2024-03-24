@@ -9,7 +9,8 @@
         <xpath expr="//notebook" position="inside">
             <page string="Details">
                <group col="4">
-                  <field name="event_ids"/>
+                  <field name="org_event_ids"/>
+                   <field name="guest_event_ids"/>
                 </group>
              </page>
         </xpath>
