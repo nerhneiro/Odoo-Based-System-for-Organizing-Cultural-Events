@@ -6,6 +6,7 @@
         'security/ir.model.access.csv',
         'security/security.xml',
         'data/sequence.xml',
+        'data/mail_template_data.xml',
         'views/user.xml',
         'views/menu.xml',
         'views/organizer.xml',

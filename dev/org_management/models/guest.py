@@ -18,3 +18,9 @@ class Guest(models.Model):
         for vals in vals_list:
             vals['ref'] = self.env['ir.sequence'].next_by_code('management.guest')
         return super(Guest, self).create(vals_list)
+
+    def action_send_invitation(self):
+        template = self.env.ref('org_management.event_guest_invitation_template')
+        for rec in self:
+            if rec.email:
+                template.send_mail(rec.id, force_send=True)
