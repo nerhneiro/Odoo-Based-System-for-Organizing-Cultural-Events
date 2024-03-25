@@ -48,7 +48,8 @@
                                                             Dear <t t-out="object.name"></t>,
                                                             <br/>
                                                             <br/>
-                                                            We invite you to our event
+                                                            We invite you to our event <t t-out="object.event_id.name"></t> that will take place in <t t-out="object.event_id.place"></t>
+                                                            by the following address: <t t-out="object.event_id.address"></t> on <t t-out="object.event_id.start"></t>
                                                             <br/>
                                                             <br/>
                                                             Thanks,
