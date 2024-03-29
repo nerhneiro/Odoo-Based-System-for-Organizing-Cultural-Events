@@ -29,3 +29,16 @@ class Event(models.Model):
         for rec in self:
             if (rec.place and not rec.address):
                 raise ValidationError(_("Address has to be recorded"))
+
+    @api.constrains('start', 'end')
+    def start_date_check(self):
+        today = fields.Datetime.today()
+        for rec in self:
+            if rec.end and rec.end < today:
+                raise ValidationError(_('You\'ve entered the date that had already passed'))
+            if rec.start and rec.start < today:
+                raise ValidationError(_('You\'ve entered the date that had already passed'))
+            if rec.start and rec.end and rec.end < rec.start:
+                raise ValidationError(_('You\'ve entered end thar is earlier than start'))
+
+
