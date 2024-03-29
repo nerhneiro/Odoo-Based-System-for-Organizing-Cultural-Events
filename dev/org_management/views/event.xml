@@ -11,8 +11,11 @@
                         <field name="name"/>
                         <field name="place"/>
                         <field name="start"/>
+                        <field name="end"/>
+                        <field name="description"/>
+                        <field name="attachment_id"/>
                         <field name="number_of_guests"/>
-                        <field name="duration"/>
+<!--                        <field name="duration"/>-->
                         <field name="address"/>
                         <field name="organizer_ids" widget="many2many_tags"/>
                         <field name="guest_ids"/>
@@ -36,7 +39,7 @@
                 <field name="start"/>
                 <field name="number_of_guests"/>
                 <field name="organizer_ids" widget="many2many_tags"/>
-                <field name="duration"/>
+<!--                <field name="duration"/>-->
                 <field name="address"/>
                 <field name="guest_ids"/>
             </tree>
