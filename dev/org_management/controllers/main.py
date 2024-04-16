@@ -14,3 +14,9 @@ class BecomeOrganizerOnSignUp(AuthSignupHome): #это override sign up page
         ]
         })
         request.env.cr.commit()
+
+class ParametersController(http.Controller):
+    @http.route(route='/redirect_info', auth='public')
+    def create_info(self, **kwargs):
+        name = kwargs.get('name')
+        print(name)

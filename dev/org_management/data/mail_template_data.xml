@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <data noupdate="1">
+    <data noupdate="0">
         <record id="event_guest_invitation_template" model="mail.template">
             <field name="name">Event guest invitation template</field>
             <field name="model_id" ref="org_management.model_management_guest"/>
@@ -50,6 +50,13 @@
                                                             <br/>
                                                             We invite you to our event <t t-out="object.event_id.name"></t> that will take place in <t t-out="object.event_id.place"></t>
                                                             by the following address: <t t-out="object.event_id.address"></t> on <t t-out="object.event_id.start"></t>
+                                                            <br/>
+                                                            <div style="margin: 16px 0px 16px 0px">
+                                                                <a t-attf-href="/redirect_info?name={{object.name}}"
+                                                                   style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff;">
+                                                                    Link to the event
+                                                                </a>
+                                                            </div>
                                                             <br/>
                                                             <br/>
                                                             Thanks,
