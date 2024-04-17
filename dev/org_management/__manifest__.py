@@ -7,6 +7,8 @@
         'security/security.xml',
         'data/sequence.xml',
         'data/mail_template_data.xml',
+        'data/mail_template_data_vip_guest.xml',
+        'data/mail_template_data_speaker.xml',
         'views/user.xml',
         'views/menu.xml',
         'views/organizer.xml',
