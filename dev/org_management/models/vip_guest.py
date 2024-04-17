@@ -24,3 +24,10 @@ class VIPguest(models.Model):
         for vals in vals_list:
             vals['ref'] = self.env['ir.sequence'].next_by_code('management.vip_guest')
         return super(VIPguest, self).create(vals_list)
+
+    def action_send_invitation(self):
+        template = self.env.ref('org_management.event_vip_guest_invitation_template')
+        for rec in self:
+            if rec.email:
+                template.send_mail(rec.id, force_send=True)
+                self.message_post(body='Invitation sent')

@@ -23,4 +23,11 @@ class Speaker(models.Model):
             vals['ref'] = self.env['ir.sequence'].next_by_code('management.speaker')
         return super(Speaker, self).create(vals_list)
 
+    def action_send_invitation(self):
+        template = self.env.ref('org_management.event_speaker_invitation_template')
+        for rec in self:
+            if rec.email:
+                template.send_mail(rec.id, force_send=True)
+                self.message_post(body='Invitation sent')
+
 
