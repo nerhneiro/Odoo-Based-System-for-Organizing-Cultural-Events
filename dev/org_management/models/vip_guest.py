@@ -15,6 +15,9 @@ class VIPguest(models.Model):
     visa = fields.Char(string="Visa info", tracking=True)
     country_id = fields.Many2one('res.country', 'Country', tracking=True)
     ref = fields.Char(string="Reference", default=lambda self: _('New'))
+    event_id = fields.Many2one(comodel_name='management.event', string="Event")
+    user_id = fields.Many2one(comodel_name='res.users',
+                              string='Connected User')
 
     @api.model_create_multi
     def create(self, vals_list):

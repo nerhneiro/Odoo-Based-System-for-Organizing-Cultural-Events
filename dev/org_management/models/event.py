@@ -1,7 +1,5 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
-
-
 class Event(models.Model):
     _name = "management.event"
     _inherit = 'mail.thread'
@@ -21,8 +19,11 @@ class Event(models.Model):
                                      domain=lambda self: [("groups_id", "=",
                                                            self.env.ref("org_management.group_event_organizer").id)])
     guest_ids = fields.One2many(comodel_name='management.guest', inverse_name="event_id", string="Guests")
-                                # domain=lambda self: [("groups_id", "=",
+                                # domain=lambda self: [("user_id.groups_id", "=",
                                 #                       self.env.ref("org_management.group_event_guest").id)])
+    speaker_ids = fields.One2many(comodel_name='management.speaker', inverse_name="event_id", string="Speakers")
+    vip_guest_ids = fields.One2many(comodel_name='management.vip_guest', inverse_name="event_id", string="VIP guests")
+    #guest_emails
 
     @api.constrains('place', 'address')
     def _check_adress(self):

@@ -12,6 +12,9 @@ class Speaker(models.Model):
     email = fields.Char(string="Email")
     speech_title = fields.Char(string="Speech title", required=True)
     speech_description = fields.Char(string="Speech description")
+    user_id = fields.Many2one(comodel_name='res.users',
+                              string='Connected User')
+    event_id = fields.Many2one(comodel_name='management.event', string="Event")
     ref = fields.Char(string="Reference", default=lambda self: _('New'))
 
     @api.model_create_multi
