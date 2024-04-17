@@ -25,6 +25,7 @@
                         <field name="email"/>
                         <field name="speech_title"/>
                         <field name="speech_description"/>
+                        <field name="event_id"/>
                     </group>
                 </sheet>
                 <div class="oe_chatter">
@@ -50,6 +51,7 @@
                 <field name="email"/>
                 <field name="speech_title"/>
                 <field name="speech_description"/>
+                <field name="event_id"/>
             </tree>
         </field>
     </record>

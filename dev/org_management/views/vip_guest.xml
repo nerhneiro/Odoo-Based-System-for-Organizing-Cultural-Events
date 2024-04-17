@@ -27,6 +27,7 @@
                         <field name="passport"/>
                         <field name="visa"/>
                         <field name="country_id"/>
+                        <field name="event_id"/>
                     </group>
                 </sheet>
                 <div class="oe_chatter">
@@ -54,6 +55,7 @@
                 <field name="passport"/>
                 <field name="visa"/>
                 <field name="country_id"/>
+                <field name="event_id"/>
             </tree>
         </field>
     </record>

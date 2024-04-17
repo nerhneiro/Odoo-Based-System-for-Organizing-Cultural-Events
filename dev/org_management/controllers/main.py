@@ -4,6 +4,8 @@ from odoo.addons.auth_signup.controllers.main import AuthSignupHome
 import random
 
 PASSWORD_LENGTH = 10
+
+
 def generate_password():
     upper_letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     lower_letters = "abcdefghijklmnopqrstuvwxyz"
@@ -12,6 +14,7 @@ def generate_password():
     all_symbols = upper_letters + lower_letters + numbers + special
     generated_password = "".join(random.sample(all_symbols, PASSWORD_LENGTH))
     return generated_password
+
 
 class BecomeOrganizerOnSignUp(AuthSignupHome):  # это override sign up page
 
@@ -28,16 +31,19 @@ class BecomeOrganizerOnSignUp(AuthSignupHome):  # это override sign up page
         })
         request.env.cr.commit()
 
+
 class ParametersController(http.Controller):
     @http.route(route='/redirect_info', auth='public')
     def create_info(self, **kwargs):
         guest_id = kwargs.get('guest_id')
         email = kwargs.get('email')
+        user_email = kwargs.get('user_email')
         event_id = kwargs.get('event_id')
         person = request.env['res.users'].sudo().search([('email', '=', email)])
         guest = request.env['management.guest'].sudo().search([('id', '=', guest_id)])
         name = guest.name
         event = request.env['management.event'].sudo().search([('id', '=', event_id)])
+        print(name, email, event_id)
         if person:
             # добавить user'у guest_id
             print("SUCCESS")
@@ -50,7 +56,7 @@ class ParametersController(http.Controller):
             # create new user and redirect to change password page
             print("NOT FOUND")
             groups_id = [request.env.ref('base.group_user').id,
-            request.env.ref('org_management.group_event_guest').id]
+                         request.env.ref('org_management.group_event_guest').id]
             password = generate_password()
             http.request.env['res.users'].sudo().create({
                 'name': name,
@@ -60,6 +66,16 @@ class ParametersController(http.Controller):
                 'groups_id': groups_id
             })
             user = request.env['res.users'].sudo().search([('login', '=', email)])
-            #вот тут нужно user'у на email отправить письмо с просьбой поменять пароль с password на свой
+            # вот тут нужно user'у на email отправить письмо с просьбой поменять пароль с password на свой
+            message = (f"Hello, your login: {email}\n Your password: {password}\n Please, click the link from the previous mail again and use this data")
+            vals = {'state': 'outgoing',
+                    'subject': 'CVs',
+                    'body_html': '<pre>%s</pre>' % message,
+                    'email_to': email,
+                    'email_from': user_email,
+                    }
+            total_emails = http.request.env['mail.mail'].sudo().browse()
+            total_emails = total_emails + http.request.env['mail.mail'].sudo().create(vals)
+            total_emails.send()
             print("NEW USER CREATED", password)
-        print(name, email, event_id)
+            return "We have sent you an email with login and password."
