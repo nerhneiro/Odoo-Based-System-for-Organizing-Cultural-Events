@@ -1,7 +1,17 @@
 from odoo import http
 from odoo.http import request
 from odoo.addons.auth_signup.controllers.main import AuthSignupHome
+import random
 
+PASSWORD_LENGTH = 10
+def generate_password():
+    upper_letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    lower_letters = "abcdefghijklmnopqrstuvwxyz"
+    numbers = "0123456789"
+    special = "$#@!()*^%&"
+    all_symbols = upper_letters + lower_letters + numbers + special
+    generated_password = "".join(random.sample(all_symbols, PASSWORD_LENGTH))
+    return generated_password
 
 class BecomeOrganizerOnSignUp(AuthSignupHome):  # это override sign up page
 
@@ -28,20 +38,28 @@ class ParametersController(http.Controller):
         guest = request.env['management.guest'].sudo().search([('id', '=', guest_id)])
         name = guest.name
         event = request.env['management.event'].sudo().search([('id', '=', event_id)])
-        #добавить user'у guest_id
         if person:
+            # добавить user'у guest_id
             print("SUCCESS")
+            print(len(person.guest_event_ids), person.guest_event_ids)
+
             # redirect to login page
+            return request.redirect_query('/web/login', query=request.params)
+
         else:
             # create new user and redirect to change password page
             print("NOT FOUND")
+            groups_id = [request.env.ref('base.group_user').id,
+            request.env.ref('org_management.group_event_guest').id]
+            password = generate_password()
             http.request.env['res.users'].sudo().create({
                 'name': name,
                 'login': email,
                 'email': email,
-                'guest_event_ids': guest
+                'password': password,
+                'groups_id': groups_id
             })
             user = request.env['res.users'].sudo().search([('login', '=', email)])
-
-            print("NEW USER CREATED")
+            #вот тут нужно user'у на email отправить письмо с просьбой поменять пароль с password на свой
+            print("NEW USER CREATED", password)
         print(name, email, event_id)
