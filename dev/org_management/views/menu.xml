@@ -5,11 +5,11 @@
               name="Management"
               sequence="10"/>
 
-    <menuitem id="menu_management_block_organizer"
-              name="Create event"
+    <menuitem id="menu_management_block_events"
+              name="Create events"
               parent="menu_management_root"
-              sequence="10"
-            groups="org_management.group_event_organizer"/>
+              sequence="10"/>
+
     <menuitem id="menu_management_operations"
               name="Invite participants"
               parent="menu_management_root"

@@ -11,6 +11,7 @@
         'data/mail_template_data_speaker.xml',
         'views/user.xml',
         'views/menu.xml',
+        'views/events_attend.xml',
         'views/organizer.xml',
         'views/event.xml',
         'views/vip_guest.xml',

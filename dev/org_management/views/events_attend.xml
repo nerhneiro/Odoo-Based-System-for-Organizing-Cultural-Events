@@ -56,13 +56,13 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">management.event</field>
         <field name="view_mode">tree,form</field>
+<!--        <field name="domain">[('participant_ids', 'in', [uid])]</field>-->
     </record>
 
-    <menuitem id="menu_events"
-              name="Events I organize"
+    <menuitem id="menu_events_attend"
+              name="Events I attend"
               parent="menu_management_block_events"
               action="action_management_event"
-              sequence="10"
-    groups="org_management.group_event_organizer"/>
+              sequence="10"/>
 
 </odoo>
