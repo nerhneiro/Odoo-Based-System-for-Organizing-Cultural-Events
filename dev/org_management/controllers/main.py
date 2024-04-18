@@ -54,6 +54,10 @@ class GuestParametersController(http.Controller):
             print(len(user.guest_event_ids))
             guest.sudo().write({'user_id': user.id})
             print(len(user.guest_event_ids))
+            a = len(event.guest_user_ids)
+            event.sudo().write({'guest_user_ids': [(4, user.id)]})
+            b = len(event.guest_user_ids)
+            print("Successfully wrote guest_user_id", a, b)
             # redirect to login page
             return request.redirect_query('/web/login', query=request.params)
 
@@ -170,9 +174,11 @@ class VipGuestParametersController(http.Controller):
             person.sudo().write({'groups_id': [(4, request.env.ref('org_management.group_event_vip_guest').id)]})
             print("Successfully wrote new VIP GUEST user group")
             user = request.env['res.users'].sudo().search([('login', '=', email)])
-            print(len(user.guest_event_ids))
+
+            a = len(user.guest_event_ids)
             guest.sudo().write({'user_id': user.id})
-            print(len(user.guest_event_ids))
+            b = len(user.guest_event_ids)
+            print("Successfully wrote user_id", a, b)
             # redirect to login page
             return request.redirect_query('/web/login', query=request.params)
 

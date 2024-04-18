@@ -21,6 +21,7 @@
                         <field name="guest_ids"/>
                         <field name="speaker_ids"/>
                         <field name="vip_guest_ids"/>
+                    <field name="guest_user_ids"/>
                     </group>
                 </sheet>
                 <div class="oe_chatter">
@@ -46,7 +47,7 @@
                 <field name="guest_ids"/>
                 <field name="speaker_ids"/>
                 <field name="vip_guest_ids"/>
-
+                <field name="guest_user_ids"/>
             </tree>
         </field>
     </record>

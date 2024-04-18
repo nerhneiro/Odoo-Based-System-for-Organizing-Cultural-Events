@@ -21,6 +21,8 @@ class Event(models.Model):
     guest_ids = fields.One2many(comodel_name='management.guest', inverse_name="event_id", string="Guests")
                                 # domain=lambda self: [("user_id.groups_id", "=",
                                 #                       self.env.ref("org_management.group_event_guest").id)])
+    guest_user_ids = fields.Many2many('res.users', relation="guests_events_rel",
+                                     column1="event_id", column2="guest_id", string="Guests")
     speaker_ids = fields.One2many(comodel_name='management.speaker', inverse_name="event_id", string="Speakers")
     vip_guest_ids = fields.One2many(comodel_name='management.vip_guest', inverse_name="event_id", string="VIP guests")
     #guest_emails
