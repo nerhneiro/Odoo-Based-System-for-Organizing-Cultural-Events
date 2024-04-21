@@ -12,16 +12,18 @@
                         <field name="place"/>
                         <field name="start"/>
                         <field name="end"/>
+
+                        <field name="meeting_url" widget="url"/>
                         <field name="description"/>
                         <field name="attachment_id"/>
                         <field name="number_of_guests"/>
-<!--                        <field name="duration"/>-->
+                        <!--                        <field name="duration"/>-->
                         <field name="address"/>
                         <field name="organizer_ids" widget="many2many_tags"/>
                         <field name="guest_ids"/>
                         <field name="speaker_ids"/>
                         <field name="vip_guest_ids"/>
-                    <field name="guest_user_ids"/>
+                        <field name="guest_user_ids"/>
                     </group>
                 </sheet>
                 <div class="oe_chatter">
@@ -40,10 +42,15 @@
                 <field name="name"/>
                 <field name="place"/>
                 <field name="start"/>
+                <field name="end"/>
+
+                <field name="meeting_url" widget="url"/>
+                <field name="description"/>
+                <field name="attachment_id"/>
                 <field name="number_of_guests"/>
-                <field name="organizer_ids" widget="many2many_tags"/>
-<!--                <field name="duration"/>-->
+                <!--                        <field name="duration"/>-->
                 <field name="address"/>
+                <field name="organizer_ids" widget="many2many_tags"/>
                 <field name="guest_ids"/>
                 <field name="speaker_ids"/>
                 <field name="vip_guest_ids"/>
@@ -51,7 +58,16 @@
             </tree>
         </field>
     </record>
-
+    <record id="view_management_event_search" model="ir.ui.view">
+        <field name="name">management.event.search</field>
+        <field name="model">management.event</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter name="filter_organize" string="Attend" domain="[('guest_user_ids', 'in', [uid])]"/>
+                <filter name="filter_organize" string="Organize" domain="[('organizer_ids','in',[uid])]"/>
+            </search>
+        </field>
+    </record>
     <record id="action_management_event" model="ir.actions.act_window">
         <field name="name">Events</field>
         <field name="type">ir.actions.act_window</field>
@@ -60,10 +76,9 @@
     </record>
 
     <menuitem id="menu_events"
-              name="Events I organize"
-              parent="menu_management_block_events"
+              name="Events"
+              parent="menu_management_root"
               action="action_management_event"
-              sequence="10"
-    groups="org_management.group_event_organizer"/>
+              sequence="10"/>
 
 </odoo>

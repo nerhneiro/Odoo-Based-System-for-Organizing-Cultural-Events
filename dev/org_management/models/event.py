@@ -8,9 +8,9 @@ class Event(models.Model):
     name = fields.Char(string="Name", required=True)
     place = fields.Char(string="Place", tracking=True)
     description = fields.Char(string="Description", tracking=True)
-    start = fields.Datetime(string="Start", tracking=True)
-    end = fields.Datetime(string="End", tracking=True)
-    attachment_id = fields.Many2one('ir.attachment', string="Information", required=False)
+    start = fields.Datetime(string="Start", required=True, tracking=True)
+    end = fields.Datetime(string="End", required=True, tracking=True)
+    attachment_id = fields.Many2one('ir.attachment', string="Additional information in file", required=False)
     number_of_guests = fields.Integer(string="Max number of guests", tracking=True)
     # duration = fields.Float(string="Duration", tracking=True)
     address = fields.Char(string="Address", tracking=True)
@@ -22,9 +22,10 @@ class Event(models.Model):
                                 # domain=lambda self: [("user_id.groups_id", "=",
                                 #                       self.env.ref("org_management.group_event_guest").id)])
     guest_user_ids = fields.Many2many('res.users', relation="guests_events_rel",
-                                     column1="event_id", column2="guest_id", string="Guests")
+                                     column1="event_id", column2="guest_id", string="Guests Attend")
     speaker_ids = fields.One2many(comodel_name='management.speaker', inverse_name="event_id", string="Speakers")
     vip_guest_ids = fields.One2many(comodel_name='management.vip_guest', inverse_name="event_id", string="VIP guests")
+    meeting_url = fields.Char(string="link")
     #guest_emails
 
     @api.constrains('place', 'address')
