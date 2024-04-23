@@ -62,7 +62,9 @@
         <field name="model">management.event</field>
         <field name="arch" type="xml">
             <search>
-                <filter name="filter_organize" string="Attend" domain="[('guest_user_ids', 'in', [uid])]"/>
+                <filter name="filter_organize" string="Attend as a guest" domain="[('guest_user_ids', 'in', [uid])]"/>
+                <filter name="filter_organize" string="Attend as a vip-guest" domain="[('vip_guest_user_ids', 'in', [uid])]"/>
+                <filter name="filter_organize" string="Attend as a speaker" domain="[('speaker_user_ids', 'in', [uid])]"/>
                 <filter name="filter_organize" string="Organize" domain="[('organizer_ids','in',[uid])]"/>
             </search>
         </field>
