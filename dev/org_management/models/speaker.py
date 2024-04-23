@@ -4,8 +4,8 @@ class Speaker(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = "Speaker information"
 
-    name = fields.Char(string="Name", required=True)
-    surname = fields.Char(string="Surname", required=True)
+    name = fields.Char(string="Name*", required=True)
+    surname = fields.Char(string="Surname*", required=True)
     second_name = fields.Char(string="Second name", required=False)
     gender = fields.Selection([('male', 'Male'), ('female', 'Female'), ('others', 'Others')], string="Gender")
     phone_number = fields.Char(string="Phone number")

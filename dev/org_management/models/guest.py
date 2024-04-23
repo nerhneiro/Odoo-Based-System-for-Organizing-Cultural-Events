@@ -4,13 +4,13 @@ class Guest(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = "Guest information"
 
-    name = fields.Char(string="Name", required=True, tracking=True)
-    surname = fields.Char(string="Surname", required=True, tracking=True)
+    name = fields.Char(string="Name*", required=True, tracking=True)
+    surname = fields.Char(string="Surname*", required=True, tracking=True)
     second_name = fields.Char(string="Second name", required=False, tracking=True)
     is_adult = fields.Boolean(string="Is over 18?", tracking=True)
     gender = fields.Selection([('male', 'Male'), ('female', 'Female'), ('others', 'Others')], string="Gender", tracking=True)
     phone_number = fields.Char(string="Phone number", tracking=True)
-    email = fields.Char(string="Email", required=True, tracking=True)
+    email = fields.Char(string="Email*", required=True, tracking=True)
     event_id = fields.Many2one(comodel_name='management.event', string="Event")
     user_id = fields.Many2one(comodel_name='res.users',
                               string='Connected User')

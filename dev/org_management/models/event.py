@@ -5,11 +5,11 @@ class Event(models.Model):
     _inherit = 'mail.thread'
     _description = "Event information"
 
-    name = fields.Char(string="Name", required=True)
-    place = fields.Char(string="Place", tracking=True)
+    name = fields.Char(string="Name*", required=True)
+    place = fields.Char(string="Place*", tracking=True)
     description = fields.Char(string="Description", tracking=True)
-    start = fields.Datetime(string="Start", required=True, tracking=True)
-    end = fields.Datetime(string="End", required=True, tracking=True)
+    start = fields.Datetime(string="Start*", required=True, tracking=True)
+    end = fields.Datetime(string="End*", required=True, tracking=True)
     attachment_id = fields.Many2one('ir.attachment', string="Additional information in file", required=False)
     number_of_guests = fields.Integer(string="Max number of guests", tracking=True)
     # duration = fields.Float(string="Duration", tracking=True)
