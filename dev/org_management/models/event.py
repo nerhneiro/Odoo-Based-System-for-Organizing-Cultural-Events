@@ -23,6 +23,10 @@ class Event(models.Model):
                                 #                       self.env.ref("org_management.group_event_guest").id)])
     guest_user_ids = fields.Many2many('res.users', relation="guests_events_rel",
                                      column1="event_id", column2="guest_id", string="Guests Attend")
+    vip_guest_user_ids = fields.Many2many('res.users', relation="vip_guests_events_rel",
+                                      column1="event_id", column2="vip_guest_id", string="VIP Guests Attend")
+    speaker_user_ids = fields.Many2many('res.users', relation="speakers_events_rel",
+                                          column1="event_id", column2="speaker_id", string="Speakers Attend")
     speaker_ids = fields.One2many(comodel_name='management.speaker', inverse_name="event_id", string="Speakers")
     vip_guest_ids = fields.One2many(comodel_name='management.vip_guest', inverse_name="event_id", string="VIP guests")
     meeting_url = fields.Char(string="link")
@@ -44,5 +48,3 @@ class Event(models.Model):
                 raise ValidationError(_('You\'ve entered the date that had already passed'))
             if rec.start and rec.end and rec.end < rec.start:
                 raise ValidationError(_('You\'ve entered end thar is earlier than start'))
-
-

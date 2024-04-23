@@ -81,10 +81,11 @@ class GuestParametersController(http.Controller):
             # guest = request.env['management.guest'].sudo().search([('id', '=', guest_id)])
             print("HERE")
             guest.sudo().write({'user_id': user.id})
+            event.sudo().write({'guest_user_ids': [(4, user.id)]})
             print("HERE")
             # вот тут нужно user'у на email отправить письмо с просьбой поменять пароль с password на свой
             message = (
-                f"Hello, your login: {email}\n Your password: {password}\n Please, click the link from the previous mail again and use this data")
+                f"Hello, {user.name}. Your login: {email}\n Your password: {password}\n Please, click the link from the previous mail again and use this data")
             vals = {'state': 'outgoing',
                     'subject': 'Registration in Event Management System',
                     'body_html': '<pre>%s</pre>' % message,
@@ -95,7 +96,7 @@ class GuestParametersController(http.Controller):
             total_emails = total_emails + http.request.env['mail.mail'].sudo().create(vals)
             total_emails.send()
             print("NEW USER CREATED", password)
-            return f"We have sent you an email on {email} with your login and password to sign in in Event Management System. Please, check your inbox and change your password immediately."
+            return f"We have sent you an email on {email} with your login and password to sign in in Event Management System. Please, check your inbox and change your password immediately.\n Update this page to get to the login page."
 
 
 class SpeakerParametersController(http.Controller):
@@ -119,6 +120,7 @@ class SpeakerParametersController(http.Controller):
             user = request.env['res.users'].sudo().search([('login', '=', email)])
             print(len(user.speaker_ids))
             guest.sudo().write({'user_id': user.id})
+            event.sudo().write({'speaker_user_ids': [(4, user.id)]})
             print(len(user.speaker_ids))
             # redirect to login page
             return request.redirect_query('/web/login', query=request.params)
@@ -139,6 +141,7 @@ class SpeakerParametersController(http.Controller):
             user = request.env['res.users'].sudo().search([('login', '=', email)])
             speaker = request.env['management.speaker'].sudo().search([('id', '=', speaker_id)])
             speaker.sudo().write({'user_id': user.id})
+            event.sudo().write({'speaker_user_ids': [(4, user.id)]})
             # вот тут нужно user'у на email отправить письмо с просьбой поменять пароль с password на свой
             message = (
                 f"Hello, your login: {email}\n Your password: {password}\n Please, click the link from the previous mail again and use this data")
@@ -178,6 +181,7 @@ class VipGuestParametersController(http.Controller):
             a = len(user.guest_event_ids)
             guest.sudo().write({'user_id': user.id})
             b = len(user.guest_event_ids)
+            event.sudo().write({'vip_guest_user_ids': [(4, user.id)]})
             print("Successfully wrote user_id", a, b)
             # redirect to login page
             return request.redirect_query('/web/login', query=request.params)
@@ -199,6 +203,7 @@ class VipGuestParametersController(http.Controller):
             user = request.env['res.users'].sudo().search([('login', '=', email)])
             vip_guest = request.env['management.vip_guest'].sudo().search([('id', '=', vip_guest_id)])
             vip_guest.sudo().write({'user_id': user.id})
+            event.sudo().write({'vip_guest_user_ids': [(4, user.id)]})
             # вот тут нужно user'у на email отправить письмо с просьбой поменять пароль с password на свой
             message = (
                 f"Hello, your login: {email}\n Your password: {password}\n Please, click the link from the previous mail again and use this data")
