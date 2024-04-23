@@ -10,6 +10,28 @@
         <field name="category_id" ref="category_management"/>
     </record>
 
+    <record id="group_event_guest" model="res.groups">
+        <field name="name">Event guest</field>
+        <field name="category_id" ref="category_management"/>
+    </record>
+
+    <record id="group_event_vip_guest" model="res.groups">
+        <field name="name">Event VIP guest</field>
+        <field name="category_id" ref="category_management"/>
+        <field name="implied_ids" eval="[(4, ref('group_event_guest'))]"/>
+    </record>
+
+    <record id="group_event_speaker" model="res.groups">
+        <field name="name">Event Speaker</field>
+        <field name="category_id" ref="category_management"/>
+        <field name="implied_ids" eval="[(4, ref('group_event_guest'))]"/>
+    </record>
+
+    <record id="group_admin" model="res.groups">
+        <field name="name">Admin</field>
+        <field name="category_id" ref="category_management"/>
+    </record>
+
     <record model="ir.rule" id="see_their_events">
         <field name="name">See only their events</field>
         <field name="model_id" ref="model_management_event"/>
@@ -21,20 +43,26 @@
         <field name="perm_read" eval="1"/>
     </record>
 
-<!--    <record model="ir.rule" id="see_events_i_attend">-->
-<!--        <field name="name">See only their events</field>-->
-<!--        <field name="model_id" ref="model_management_event"/>-->
-<!--        <field name="domain_force">[('guest_user_ids','in',[user.id])]</field>-->
-<!--        <field name="groups" eval="[(4, ref('group_event_guest'))]"/>-->
-<!--        <field name="perm_create" eval="1"/>-->
-<!--        <field name="perm_write" eval="1"/>-->
-<!--        <field name="perm_unlink" eval="1"/>-->
-<!--        <field name="perm_read" eval="1"/>-->
-<!--    </record>-->
+    <record model="ir.rule" id="cant_change_event_if_org_is_guest">
+        <field name="name">Can't change the event if org is a guest</field>
+        <field name="model_id" ref="model_management_event"/>
+        <field name="domain_force">[('guest_user_ids','in',[user.id])]</field>
+        <field name="groups" eval="[(4, ref('group_event_organizer'))]"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_write" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+        <field name="perm_read" eval="1"/>
+    </record>
 
-    <record id="group_admin" model="res.groups">
-        <field name="name">Admin</field>
-        <field name="category_id" ref="category_management"/>
+    <record model="ir.rule" id="see_events_i_attend">
+        <field name="name">See events I attend</field>
+        <field name="model_id" ref="model_management_event"/>
+        <field name="domain_force">[('guest_user_ids','in',[user.id])]</field>
+        <field name="groups" eval="[(4, ref('group_event_guest'))]"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_write" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+        <field name="perm_read" eval="1"/>
     </record>
 
     <record model="ir.rule" id="see_all_events">
@@ -46,18 +74,5 @@
         <field name="perm_write" eval="1"/>
         <field name="perm_unlink" eval="1"/>
         <field name="perm_read" eval="1"/>
-    </record>
-
-    <record id="group_event_guest" model="res.groups">
-        <field name="name">Event guest</field>
-        <field name="category_id" ref="category_management"/>
-    </record>
-    <record id="group_event_vip_guest" model="res.groups">
-        <field name="name">Event VIP guest</field>
-        <field name="category_id" ref="category_management"/>
-    </record>
-    <record id="group_event_speaker" model="res.groups">
-        <field name="name">Event Speaker</field>
-        <field name="category_id" ref="category_management"/>
     </record>
 </odoo>

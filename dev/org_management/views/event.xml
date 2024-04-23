@@ -8,22 +8,21 @@
             <form>
                 <sheet>
                     <group>
-                        <field name="name"/>
-                        <field name="place"/>
-                        <field name="start"/>
-                        <field name="end"/>
-
-                        <field name="meeting_url" widget="url"/>
-                        <field name="description"/>
-                        <field name="attachment_id"/>
-                        <field name="number_of_guests"/>
+                        <field name="name" readonly="uid in guest_user_ids"/>
+                        <field name="place" readonly="uid in guest_user_ids"/>
+                        <field name="start" readonly="uid in guest_user_ids"/>
+                        <field name="end" readonly="uid in guest_user_ids"/>
+                        <field name="meeting_url" widget="url" readonly="uid in guest_user_ids"/>
+                        <field name="description" readonly="uid in guest_user_ids"/>
+                        <field name="attachment_id" readonly="uid in guest_user_ids"/>
+                        <field name="number_of_guests" readonly="uid in guest_user_ids"/>
                         <!--                        <field name="duration"/>-->
-                        <field name="address"/>
-                        <field name="organizer_ids" widget="many2many_tags"/>
-                        <field name="guest_ids"/>
-                        <field name="speaker_ids"/>
-                        <field name="vip_guest_ids"/>
-                        <field name="guest_user_ids"/>
+                        <field name="address" readonly="uid in guest_user_ids"/>
+                        <field name="organizer_ids" widget="many2many_tags" readonly="uid in guest_user_ids" invisible="not organizer_ids"/>
+                        <field name="guest_ids" invisible="uid in guest_user_ids"/>
+                        <field name="speaker_ids" readonly="uid in guest_user_ids"/>
+                        <field name="vip_guest_ids" invisible="uid in guest_user_ids"/>
+                        <field name="guest_user_ids" invisible="uid in guest_user_ids"/>
                     </group>
                 </sheet>
                 <div class="oe_chatter">
