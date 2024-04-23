@@ -52,7 +52,7 @@
                                                             by the following address: <t t-out="object.event_id.address"></t> on <t t-out="object.event_id.start"></t>
                                                             <br/>
                                                             <div style="margin: 16px 0px 16px 0px">
-                                                                <a t-attf-href="/speaker_addition?speaker_id=#{object.id}&amp;email=#{object.email}&amp;event_id=#{object.event_id.id}&amp;"
+                                                                <a t-attf-href="/speaker_addition?speaker_id=#{object.id}&amp;email=#{object.email}&amp;event_id=#{object.event_id.id}&amp;user_email=#{user.email}&amp;"
                                                                    style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff;">
                                                                     Link to the event
                                                                 </a>
@@ -62,7 +62,7 @@
                                                             Thanks,
                                                             <t t-if="user.signature">
                                                                 <br/>
-                                                                <t t-out="user.signature">--<br/><t t-out="user.name"/>
+                                                                <t t-out="user.name">--<br/><t t-out="user.name"/>
                                                                 </t>
                                                             </t>
                                                         </div>
