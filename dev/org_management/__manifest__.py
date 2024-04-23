@@ -3,8 +3,8 @@
     'author': 'Irene and Nick',
     'depends': ['mail'],
     'data': [
-        'security/ir.model.access.csv',
         'security/security.xml',
+        'security/ir.model.access.csv',
         'data/sequence.xml',
         'data/mail_template_data.xml',
         'data/mail_template_data_vip_guest.xml',
