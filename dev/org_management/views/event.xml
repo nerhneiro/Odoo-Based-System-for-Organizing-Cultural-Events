@@ -7,10 +7,6 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
-                    <header>
-                        <button name="add_organizer" string="Add organizer" class="oe_highlight"
-                                data-hotkey="m" type="object"/>
-                    </header>
                     <group>
                         <field name="name" readonly="uid in guest_user_ids"/>
                         <field name="place" readonly="uid in guest_user_ids"/>
@@ -22,12 +18,11 @@
                         <field name="number_of_guests" readonly="uid in guest_user_ids"/>
                         <!--                        <field name="duration"/>-->
                         <field name="address" readonly="uid in guest_user_ids"/>
-                        <field name="organizer_ids" widget="many2many_tags" readonly="uid in guest_user_ids"
-                               invisible="not organizer_ids"/>
+                        <field name="organizer_ids" widget="many2many_tags" readonly="uid in guest_user_ids" invisible="not organizer_ids"/>
                         <field name="guest_ids" invisible="uid in guest_user_ids"/>
                         <field name="speaker_ids" readonly="uid in guest_user_ids"/>
                         <field name="vip_guest_ids" invisible="uid in guest_user_ids"/>
-                        <field name="guest_user_ids" invisible="uid in guest_user_ids"/>
+                        <field name="guest_user_ids" invisible="1"/>
                     </group>
                 </sheet>
                 <div class="oe_chatter">
@@ -83,10 +78,10 @@
         <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem id="menu_events"
+     <menuitem id="menu_events"
               name="Events"
               parent="menu_management_root"
               action="action_management_event"
-              sequence="10"/>
+              sequence="1"/>
 
 </odoo>
