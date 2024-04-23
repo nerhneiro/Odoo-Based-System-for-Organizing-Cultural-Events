@@ -218,3 +218,68 @@ class VipGuestParametersController(http.Controller):
             total_emails.send()
             print("NEW USER CREATED", password)
             return f"We have sent you an email on {email} with your login and password to sign in in Event Management System. Please, check your inbox and change your password immediately."
+
+class OrganizerAdditionController(http.Controller):
+    @http.route(route='/organizer_addition', auth='public')
+    def add_organizer(self, **kwargs):
+        organizer_id = kwargs.get('organizer_id')
+        email = kwargs.get('email')
+        user_email = kwargs.get('user_email')
+        event_id = kwargs.get('event_id')
+        person = request.env['res.users'].sudo().search([('email', '=', email)])
+        organizer = request.env['management.organizer'].sudo().search([('id', '=', organizer_id)])
+        name = organizer.name
+        event = request.env['management.event'].sudo().search([('id', '=', event_id)])
+        print(organizer_id, name, email, event_id)
+        if person:
+            # добавить user'у guest_id
+            print("SUCCESS")
+            print(len(person.org_invited_ids), person.org_invited_ids)
+            person.sudo().write({'groups_id': [(4, request.env.ref('org_management.group_event_organizer').id)]})
+            print("Successfully wrote new ORGANIZER user group")
+            user = request.env['res.users'].sudo().search([('login', '=', email)])
+
+            a = len(user.org_event_ids)
+            organizer.sudo().write({'user_id': user.id})
+            b = len(user.org_event_ids)
+            event.sudo().write({'organizer_ids': [(4, user.id)]})
+            print("Successfully wrote user_id", a, b)
+            # redirect to login page
+            return request.redirect_query('/web/login', query=request.params)
+
+        else:
+            # create new user and redirect to change password page
+            print("NOT FOUND")
+            groups_id = [request.env.ref('base.group_user').id,
+                         request.env.ref('org_management.group_event_organizer').id]
+            password = generate_password()
+            http.request.env['res.users'].sudo().create({
+                'name': name,
+                'login': email,
+                'email': email,
+                'password': password,
+                'groups_id': groups_id
+            })
+            print("Created new user")
+            # добавить юзеру гостя и гостя юзеру
+            user = request.env['res.users'].sudo().search([('login', '=', email)])
+            print("Found user")
+            organizer = request.env['management.organizer'].sudo().search([('id', '=', organizer_id)])
+            organizer.sudo().write({'user_id': user.id})
+            print("Here")
+            # event.sudo().write({'org_ids': [(4, user.id)]})
+            print("Here")
+            # вот тут нужно user'у на email отправить письмо с просьбой поменять пароль с password на свой
+            message = (
+                f"Hello, your login: {email}\n Your password: {password}\n Please, click the link from the previous mail again and use this data")
+            vals = {'state': 'outgoing',
+                    'subject': 'Registration in Event Management System',
+                    'body_html': '<pre>%s</pre>' % message,
+                    'email_to': email,
+                    'email_from': user_email,
+                    }
+            total_emails = http.request.env['mail.mail'].sudo().browse()
+            total_emails = total_emails + http.request.env['mail.mail'].sudo().create(vals)
+            total_emails.send()
+            print("NEW USER CREATED", password)
+            return f"We have sent you an email on {email} with your login and password to sign in in Event Management System. Please, check your inbox and change your password immediately."

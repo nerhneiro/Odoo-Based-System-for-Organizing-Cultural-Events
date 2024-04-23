@@ -15,10 +15,15 @@
                         <field name="gender"/>
                         <field name="phone_number"/>
                         <field name="email"/>
+                        <field name="event_id"/>
 <!--                        <field name="event_ids" widget="many2many_tags"/>-->
                     </group>
+
+                 <button name="action_send_invitation" string="Send an invitation" class="oe_highlight"
+                            data-hotkey="m" type="object"/>
                 </sheet>
             </form>
+
         </field>
     </record>
 

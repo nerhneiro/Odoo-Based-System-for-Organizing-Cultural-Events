@@ -9,6 +9,7 @@
         'data/mail_template_data.xml',
         'data/mail_template_data_vip_guest.xml',
         'data/mail_template_data_speaker.xml',
+        'data/mail_template_data_organizer.xml',
         'views/user.xml',
         'views/menu.xml',
         # 'views/events_attend.xml',

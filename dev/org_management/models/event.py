@@ -19,6 +19,7 @@ class Event(models.Model):
                                      domain=lambda self: [("groups_id", "=",
                                                            self.env.ref("org_management.group_event_organizer").id)])
     guest_ids = fields.One2many(comodel_name='management.guest', inverse_name="event_id", string="Guests")
+    org_ids = fields.One2many(comodel_name='management.organizer', inverse_name="event_id", string="Organizers")
                                 # domain=lambda self: [("user_id.groups_id", "=",
                                 #                       self.env.ref("org_management.group_event_guest").id)])
     guest_user_ids = fields.Many2many('res.users', relation="guests_events_rel",
@@ -48,3 +49,19 @@ class Event(models.Model):
                 raise ValidationError(_('You\'ve entered the date that had already passed'))
             if rec.start and rec.end and rec.end < rec.start:
                 raise ValidationError(_('You\'ve entered end thar is earlier than start'))
+
+    @api.model_create_multi
+    def create(self, values):
+        values[0]['organizer_ids'] = [self.env.user.id]
+        return super(Event, self).create(values)
+    def add_organizer(self):
+        name = _('Add Organizer')
+        view_mode = 'form'
+        return {
+            'name': name,
+            'view_type': 'form',
+            'view_mode': view_mode,
+            'res_model': 'management.organizer',
+            'type': 'ir.actions.act_window',
+            'target': 'current',
+        }

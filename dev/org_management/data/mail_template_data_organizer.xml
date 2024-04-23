@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="0">
+        <record id="event_organizer_invitation_template" model="mail.template">
+            <field name="name">Event vip guest invitation template</field>
+            <field name="model_id" ref="org_management.model_management_organizer"/>
+            <field name="subject">Event details</field>
+            <field name="email_from">{{ user.email }}</field>
+            <field name="email_to">{{ object.email }}</field>
+
+            <field name="body_html" type="html">
+                <table border="0" cellpadding="0" cellspacing="0"
+                       style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;">
+                    <tr>
+                        <td align="center">
+                            <table border="0" cellpadding="0" width="590"
+                                   style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                                <tbody>
+                                    <tr>
+                                        <td align="center" style="min-width: 590px;">
+                                            <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                                   style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                                <tr>
+                                                    <td valign="middle">
+                                                        <br/>
+                                                        <span style="font-size: 20px; font-weight: bold;">
+                                                            <t t-out="object.name"></t>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" style="text-align:center;">
+                                                        <hr width="100%"
+                                                            style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td align="center" style="min-width: 590px">
+                                            <table border="0" cellpadding="0" cellspacing="0" width="590"
+                                                   style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                                <tr>
+                                                    <td valign="top" style="font-size: 13px">
+                                                        <div>
+                                                            Dear <t t-out="object.name"></t>,
+                                                            <br/>
+                                                            <br/>
+                                                            We invite you become an organizer of our event <t t-out="object.event_id.name"></t> that will take place in <t t-out="object.event_id.place"></t>
+                                                            by the following address: <t t-out="object.event_id.address"></t> on <t t-out="object.event_id.start"></t>
+                                                            <br/>
+                                                            <div style="margin: 16px 0px 16px 0px">
+                                                                <a t-attf-href="/organizer_addition?organizer_id=#{object.id}&amp;name=#{object.name}&amp;email=#{object.email}&amp;event_id=#{object.event_id.id}&amp;user_email=#{user.email}&amp;"
+                                                                   style="background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff;">
+                                                                    Become organizer
+                                                                </a>
+                                                            </div>
+                                                            <br/>
+                                                            <br/>
+                                                            Thanks,
+                                                            <t t-if="user.signature">
+                                                                <br/>
+                                                                <t t-out="user.name">--<br/><t t-out="user.name"/>
+                                                                </t>
+                                                            </t>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align:center;">
+                                                        <hr width="100%"
+                                                            style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+    </data>
+</odoo>
