@@ -17,6 +17,12 @@ class Organizer(models.Model):
     # domain = lambda self: [("groups_id", "=",self.env.ref("org_management.group_event_organizer").id)]
     # event_ids = fields.Many2many(comodel_name="management.event", relation="organizers_events_rel", column1="organizer_id", column2="event_id", string="Events")
 
+    @api.onchange('event_id')
+    def only_my_events(self):
+        uid = self.env.user.id
+        for rec in self:
+            return {'domain': {'event_id': [('organizer_ids', 'in', [uid])]}}
+
     def action_send_invitation(self):
         print("Here ")
         template = self.env.ref('org_management.event_organizer_invitation_template')
