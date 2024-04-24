@@ -13,7 +13,7 @@ class Event(models.Model):
     attachment_id = fields.Many2one('ir.attachment', string="Additional information in file", required=False)
     number_of_guests = fields.Integer(string="Max number of guests", tracking=True)
     # duration = fields.Float(string="Duration", tracking=True)
-    address = fields.Char(string="Address", tracking=True)
+    address = fields.Char(string="Address*", tracking=True)
     organizer_ids = fields.Many2many('res.users', relation="organizers_events_rel",
                                      column1="event_id", column2="organizer_id", string="Organizers",
                                      domain=lambda self: [("groups_id", "=",
@@ -53,7 +53,9 @@ class Event(models.Model):
     @api.model_create_multi
     def create(self, values):
         values[0]['organizer_ids'] = [self.env.user.id]
+        print(values)
         return super(Event, self).create(values)
+
     def add_organizer(self):
         name = _('Add Organizer')
         view_mode = 'form'
