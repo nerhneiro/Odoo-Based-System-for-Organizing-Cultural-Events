@@ -31,6 +31,7 @@ class Event(models.Model):
     speaker_ids = fields.One2many(comodel_name='management.speaker', inverse_name="event_id", string="Speakers")
     vip_guest_ids = fields.One2many(comodel_name='management.vip_guest', inverse_name="event_id", string="VIP guests")
     meeting_url = fields.Char(string="link")
+    surveys = fields.One2many(comodel_name='survey.survey', inverse_name="event_id", string="Surveys")
     #guest_emails
 
     @api.constrains('place', 'address')
@@ -65,5 +66,16 @@ class Event(models.Model):
             'view_mode': view_mode,
             'res_model': 'management.organizer',
             'type': 'ir.actions.act_window',
-            'target': 'current',
+            'target': 'current'
+        }
+    def create_survey(self):
+        name = _('Create survey')
+        view_mode = 'form'
+        return {
+            'name': name,
+            'view_type': 'form',
+            'view_mode': view_mode,
+            'res_model': 'survey.survey',
+            'type': 'ir.actions.act_window',
+            'target': 'current'
         }

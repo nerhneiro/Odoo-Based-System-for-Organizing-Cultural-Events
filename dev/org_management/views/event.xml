@@ -10,6 +10,8 @@
                     <header>
                         <button name="add_organizer" string="Add organizer" class="oe_highlight" data-hotkey="m"
                                 type="object"/>
+                         <button name="create_survey" string="Create Survey" class="oe_highlight" data-hotkey="m"
+                                type="object"/>
                     </header>
                     <group>
                         <field name="name" readonly="uid in guest_user_ids"/>
@@ -34,6 +36,9 @@
                     <field name="message_follower_ids"/>
                     <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
                 </div>
+<!--                <sheet>-->
+<!--                   -->
+<!--                </sheet>-->
             </form>
         </field>
     </record>
