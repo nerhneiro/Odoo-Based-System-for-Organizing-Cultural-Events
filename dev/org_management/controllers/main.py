@@ -2,6 +2,8 @@ from odoo import http
 from odoo.http import request
 from odoo.addons.auth_signup.controllers.main import AuthSignupHome
 import random
+import requests
+import json
 
 PASSWORD_LENGTH = 10
 
@@ -18,18 +20,45 @@ def generate_password():
 
 class BecomeOrganizerOnSignUp(AuthSignupHome):  # это override sign up page
 
-    def do_signup(self, *args):
-        super(BecomeOrganizerOnSignUp, self).do_signup(*args)  # совершается регистрация пользователя
-        env = request.env
-        env.user.sudo().write({'groups_id': [
-            (3, env.ref('base.group_portal').id),
-            # удаляю пользователя из группы (типа) "Portal user", так как по дефолту приписывается она, и "User can't have two group types"
-            (4, env.ref('base.group_user').id),  # добавляю пользователя в группу "Internal user"
-            (4, env.ref('org_management.group_event_organizer').id),
-            # приписываю группу "group_event_organizer" при регистрации
-        ]
-        })
-        request.env.cr.commit()
+    def do_signup(self, *args, **kwargs):
+        if request.httprequest.method == 'POST':
+            client_key = kwargs['g-recaptcha-response']
+            secret_key = '6LcfBKkpAAAAAHswBNeV0y1hVIj3dYWqwLRJUv1e'
+            captcha_data = {
+                'secret': secret_key,
+                'response': client_key
+            }
+            r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=captcha_data)
+            response = json.loads(r.text)
+            verify = response['success']
+            if verify:
+                print("SUCCESS")
+                super(BecomeOrganizerOnSignUp, self).do_signup(*args)  # совершается регистрация пользователя
+                env = request.env
+                env.user.sudo().write({'groups_id': [
+                    (3, env.ref('base.group_portal').id),
+                    # удаляю пользователя из группы (типа) "Portal user", так как по дефолту приписывается она, и "User can't have two group types"
+                    (4, env.ref('base.group_user').id),  # добавляю пользователя в группу "Internal user"
+                    (4, env.ref('org_management.group_event_organizer').id),
+                    # приписываю группу "group_event_organizer" при регистрации
+                ]
+                })
+                request.env.cr.commit()
+            else:
+                values = request.params.copy()
+                values['error'] = _("Please Fill Re-Captcha")
+                return request.render('web.login',values)
+        # super(BecomeOrganizerOnSignUp, self).do_signup(*args)  # совершается регистрация пользователя
+        # env = request.env
+        # env.user.sudo().write({'groups_id': [
+        #     (3, env.ref('base.group_portal').id),
+        #     # удаляю пользователя из группы (типа) "Portal user", так как по дефолту приписывается она, и "User can't have two group types"
+        #     (4, env.ref('base.group_user').id),  # добавляю пользователя в группу "Internal user"
+        #     (4, env.ref('org_management.group_event_organizer').id),
+        #     # приписываю группу "group_event_organizer" при регистрации
+        # ]
+        # })
+        # request.env.cr.commit()
 
 
 class GuestParametersController(http.Controller):
@@ -283,3 +312,10 @@ class OrganizerAdditionController(http.Controller):
             total_emails.send()
             print("NEW USER CREATED", password)
             return f"We have sent you an email on {email} with your login and password to sign in in Event Management System. Please, check your inbox and change your password immediately."
+
+
+# class Extension_Home(Home):
+#     @http.route(auth="none")
+#     def web_login(self, redirect=None, **kw):
+#
+#         return super(Extension_Home, self).web_login()

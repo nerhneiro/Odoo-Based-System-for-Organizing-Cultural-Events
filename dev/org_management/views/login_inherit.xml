@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--    Login page-->
+    <template id="login" inherit_id="auth_signup.signup" name="Sign up with captcha">
+        <xpath expr="//div[hasclass('oe_login_buttons')]" position="before">
+            <script src='https://www.google.com/recaptcha/api.js'></script>
+            <div id="captcha">
+                <div class="form-group">
+                    <!-- specify your site  in data-sitekey attribute-->
+                    <div class="g-recaptcha"
+                         data-sitekey="6LcfBKkpAAAAAMD2431paC_g-vuMZyz336HMW8tk"></div>
+                    <div class="help-block with-errors" id="err" style='color: red'></div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>
