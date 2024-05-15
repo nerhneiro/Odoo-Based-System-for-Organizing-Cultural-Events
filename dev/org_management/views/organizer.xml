@@ -55,6 +55,7 @@
               name="Organizers"
               parent="menu_management_operations"
               action="action_management_organizer"
+              groups="org_management.group_admin"
               sequence="10"/>
 
 </odoo>

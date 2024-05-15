@@ -9,64 +9,96 @@
                 <sheet>
                     <header>
                         <button name="add_organizer" string="Add organizer" class="oe_highlight" data-hotkey="m"
-                                type="object"/>
-                         <button name="create_survey" string="Create Survey" class="oe_highlight" data-hotkey="m"
-                                type="object"/>
+                                type="object"
+                                invisible="uid in guest_user_ids or uid in vip_guest_user_ids or uid in speaker_user_ids"/>
+                        <button name="create_survey" string="Create Survey" class="oe_highlight" data-hotkey="m"
+                                type="object"
+                                invisible="uid in guest_user_ids or uid in vip_guest_user_ids or uid in speaker_user_ids"/>
                     </header>
                     <group>
-                        <field name="name" readonly="uid in guest_user_ids"/>
-                        <field name="place" readonly="uid in guest_user_ids"/>
-                        <field name="start" readonly="uid in guest_user_ids"/>
-                        <field name="end" readonly="uid in guest_user_ids"/>
-                        <field name="meeting_url" widget="url" readonly="uid in guest_user_ids"/>
-                        <field name="description" readonly="uid in guest_user_ids"/>
-                        <field name="attachment_id" readonly="uid in guest_user_ids"/>
-                        <field name="number_of_guests" readonly="uid in guest_user_ids"/>
+                        <field name="name"
+                               readonly="uid in guest_user_ids or uid in vip_guest_user_ids or uid in speaker_user_ids"/>
+                        <field name="place"
+                               readonly="uid in guest_user_ids or uid in vip_guest_user_ids or uid in speaker_user_ids"/>
+                        <field name="start"
+                               readonly="uid in guest_user_ids or uid in vip_guest_user_ids or uid in speaker_user_ids"/>
+                        <field name="end"
+                               readonly="uid in guest_user_ids or uid in vip_guest_user_ids or uid in speaker_user_ids"/>
+                        <field name="meeting_url" widget="url"
+                               readonly="uid in guest_user_ids or uid in vip_guest_user_ids or uid in speaker_user_ids"/>
+                        <field name="description"
+                               readonly="uid in guest_user_ids or uid in vip_guest_user_ids or uid in speaker_user_ids"/>
+                        <field name="attachment_id"
+                               readonly="uid in guest_user_ids or uid in vip_guest_user_ids or uid in speaker_user_ids"/>
+                        <field name="number_of_guests"
+                               readonly="uid in guest_user_ids or uid in vip_guest_user_ids or uid in speaker_user_ids"/>
                         <!--                        <field name="duration"/>-->
-                        <field name="address" readonly="uid in guest_user_ids"/>
+                        <field name="address"
+                               readonly="uid in guest_user_ids or uid in vip_guest_user_ids or uid in speaker_user_ids"/>
                         <field name="organizer_ids" widget="many2many_tags" readonly="1"
                                invisible="not organizer_ids"/>
-                        <field name="guest_ids" invisible="uid in guest_user_ids"/>
-                        <field name="speaker_ids" readonly="uid in guest_user_ids"/>
-                        <field name="vip_guest_ids" invisible="uid in guest_user_ids"/>
+                        <field name="guest_ids"
+                               invisible="uid in guest_user_ids or uid in vip_guest_user_ids or uid in speaker_user_ids"/>
+                        <field name="speaker_ids"
+                               readonly="uid in guest_user_ids or uid in vip_guest_user_ids or uid in speaker_user_ids"/>
+                        <field name="vip_guest_ids"
+                               invisible="uid in guest_user_ids or uid in vip_guest_user_ids or uid in speaker_user_ids"/>
                         <field name="guest_user_ids" invisible="1"/>
+                        <field name="vip_guest_user_ids" invisible="1"/>
+                        <field name="speaker_user_ids" invisible="1"/>
                     </group>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids"/>
                     <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
                 </div>
-<!--                <sheet>-->
-<!--                   -->
-<!--                </sheet>-->
+                <!--                <sheet>-->
+                <!--                   -->
+                <!--                </sheet>-->
             </form>
         </field>
     </record>
+
 
     <record id="view_management_event_tree" model="ir.ui.view">
         <field name="name">management.event.tree</field>
         <field name="model">management.event</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="name" readonly="uid in guest_user_ids"/>
-                <field name="place" readonly="uid in guest_user_ids"/>
-                <field name="start" readonly="uid in guest_user_ids"/>
-                <field name="end" readonly="uid in guest_user_ids"/>
-                <field name="meeting_url" widget="url" readonly="uid in guest_user_ids"/>
-                <field name="description" readonly="uid in guest_user_ids"/>
-                <field name="attachment_id" readonly="uid in guest_user_ids"/>
-                <field name="number_of_guests" readonly="uid in guest_user_ids"/>
+                <field name="name"
+                       readonly="uid in guest_user_ids or uid in vip_guest_user_ids or uid in speaker_user_ids"/>
+                <field name="place"
+                       readonly="uid in guest_user_ids or uid in vip_guest_user_ids or uid in speaker_user_ids"/>
+                <field name="start"
+                       readonly="uid in guest_user_ids or uid in vip_guest_user_ids or uid in speaker_user_ids"/>
+                <field name="end"
+                       readonly="uid in guest_user_ids or uid in vip_guest_user_ids or uid in speaker_user_ids"/>
+                <field name="meeting_url" widget="url"
+                       readonly="uid in guest_user_ids or uid in vip_guest_user_ids or uid in speaker_user_ids"/>
+                <field name="description"
+                       readonly="uid in guest_user_ids or uid in vip_guest_user_ids or uid in speaker_user_ids"/>
+                <field name="attachment_id"
+                       readonly="uid in guest_user_ids or uid in vip_guest_user_ids or uid in speaker_user_ids"/>
+                <field name="number_of_guests"
+                       readonly="uid in guest_user_ids or uid in vip_guest_user_ids or uid in speaker_user_ids"/>
                 <!--                        <field name="duration"/>-->
-                <field name="address" readonly="uid in guest_user_ids"/>
+                <field name="address"
+                       readonly="uid in guest_user_ids or uid in vip_guest_user_ids or uid in speaker_user_ids"/>
                 <field name="organizer_ids" widget="many2many_tags" readonly="1"
                        invisible="not organizer_ids"/>
-                <field name="guest_ids" invisible="uid in guest_user_ids"/>
-                <field name="speaker_ids" readonly="uid in guest_user_ids"/>
-                <field name="vip_guest_ids" invisible="uid in guest_user_ids"/>
+                <field name="guest_ids"
+                       invisible="uid in guest_user_ids or uid in vip_guest_user_ids or uid in speaker_user_ids"/>
+                <field name="speaker_ids"
+                       readonly="uid in guest_user_ids or uid in vip_guest_user_ids or uid in speaker_user_ids"/>
+                <field name="vip_guest_ids"
+                       invisible="uid in guest_user_ids or uid in vip_guest_user_ids or uid in speaker_user_ids"/>
                 <field name="guest_user_ids" invisible="1"/>
+                <field name="vip_guest_user_ids" invisible="1"/>
+                <field name="speaker_user_ids" invisible="1"/>
             </tree>
         </field>
     </record>
+
     <record id="view_management_event_search" model="ir.ui.view">
         <field name="name">management.event.search</field>
         <field name="model">management.event</field>
@@ -81,6 +113,7 @@
             </search>
         </field>
     </record>
+
     <record id="action_management_event" model="ir.actions.act_window">
         <field name="name">Events</field>
         <field name="type">ir.actions.act_window</field>

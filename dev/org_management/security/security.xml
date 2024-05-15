@@ -65,6 +65,39 @@
         <field name="perm_read" eval="1"/>
     </record>
 
+    <record model="ir.rule" id="see_events_i_attend_as_vip_guest">
+        <field name="name">See events I attend as a vip_guest</field>
+        <field name="model_id" ref="model_management_vip_guest"/>
+        <field name="domain_force">[('user_id','=',user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_event_vip_guest'))]"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="0"/>
+        <field name="perm_read" eval="1"/>
+    </record>
+    <record model="ir.rule" id="see_events_i_attend_as_speaker">
+        <field name="name">See events I attend as a speaker</field>
+        <field name="model_id" ref="model_management_speaker"/>
+        <field name="domain_force">[('user_id','=',user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_event_speaker'))]"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_write" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+        <field name="perm_read" eval="1"/>
+    </record>
+
+
+<!--    <record model="ir.rule" id="see_my_surveys">-->
+<!--        <field name="name">See my surveys</field>-->
+<!--        <field name="model_id" ref="model_survey_survey"/>-->
+<!--        <field name="domain_force">[('guest_user_ids','in',[user.id])]</field>-->
+<!--        <field name="groups" eval="[(4, ref('group_event_guest'))]"/>-->
+<!--        <field name="perm_create" eval="0"/>-->
+<!--        <field name="perm_write" eval="0"/>-->
+<!--        <field name="perm_unlink" eval="0"/>-->
+<!--        <field name="perm_read" eval="1"/>-->
+<!--    </record>-->
+
     <record model="ir.rule" id="see_all_events">
         <field name="name">See all events</field>
         <field name="model_id" ref="model_management_event"/>

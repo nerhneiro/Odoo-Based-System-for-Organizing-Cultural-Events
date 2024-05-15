@@ -65,6 +65,7 @@
               name="Guests"
               parent="menu_management_operations"
               action="action_management_guest"
+              groups="org_management.group_admin"
               sequence="10"/>
 
 </odoo>

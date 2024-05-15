@@ -8,7 +8,8 @@
             <form>
                 <header>
                     <button name="action_send_invitation" string="Send an invitation" class="oe_highlight"
-                            data-hotkey="m" type="object"/>
+                            data-hotkey="m" type="object"
+                            invisible="uid == user_id"/>
                 </header>
                 <sheet>
                     <div class="oe_title">
@@ -22,10 +23,12 @@
                         <field name="second_name"/>
                         <field name="gender"/>
                         <field name="phone_number"/>
-                        <field name="email"/>
+                        <field name="email" readonly="uid == user_id"/>
                         <field name="speech_title"/>
                         <field name="speech_description"/>
-                        <field name="event_id"/>
+                        <field name="attachment_id"  domain="[('create_uid', 'in', [uid])]"/>
+                        <field name="event_id" readonly="uid == user_id"/>
+                        <field name="user_id" invisible="1"/>
                     </group>
                 </sheet>
                 <div class="oe_chatter">
@@ -48,10 +51,12 @@
                 <field name="second_name"/>
                 <field name="gender"/>
                 <field name="phone_number"/>
-                <field name="email"/>
+                <field name="email" readonly="uid == user_id"/>
                 <field name="speech_title"/>
                 <field name="speech_description"/>
-                <field name="event_id"/>
+                <field name="attachment_id" domain="[('create_uid', 'in', [uid])]"/>
+                <field name="event_id" readonly="uid == user_id"/>
+                <field name="user_id" invisible="1"/>
             </tree>
         </field>
     </record>
@@ -67,6 +72,26 @@
               name="Speakers"
               parent="menu_management_operations"
               action="action_management_speaker"
+              groups="org_management.group_admin"
               sequence="10"/>
 
+    <record id="action_management_my_speakers" model="ir.actions.act_window">
+        <field name="name">Speakers</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">management.speaker</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'create': 0}</field>
+    </record>
+    <menuitem id="menu_my_speakers"
+              name="Me as speakers"
+              parent="menu_management_root"
+              action="action_management_my_speakers"
+              groups="org_management.group_event_speaker"
+              sequence="10"/>
+    <!--    <menuitem id="menu_my_vip_guests"-->
+    <!--              name="Me as VIP guests"-->
+    <!--              parent="menu_management_root"-->
+    <!--              action="action_management_my_vip_guests"-->
+    <!--              groups="org_management.group_event_vip_guest"-->
+    <!--              sequence="10"/>-->
 </odoo>

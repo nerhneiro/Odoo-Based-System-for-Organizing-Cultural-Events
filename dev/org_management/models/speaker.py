@@ -10,10 +10,11 @@ class Speaker(models.Model):
     gender = fields.Selection([('male', 'Male'), ('female', 'Female'), ('others', 'Others')], string="Gender")
     phone_number = fields.Char(string="Phone number")
     email = fields.Char(string="Email")
-    speech_title = fields.Char(string="Speech title", required=True)
+    speech_title = fields.Char(string="Speech title")
     speech_description = fields.Char(string="Speech description")
     user_id = fields.Many2one(comodel_name='res.users',
                               string='Connected User')
+    attachment_id = fields.Many2one('ir.attachment', string="Speech info", required=False)
     event_id = fields.Many2one(comodel_name='management.event', string="Event")
     ref = fields.Char(string="Reference", default=lambda self: _('New'))
 
